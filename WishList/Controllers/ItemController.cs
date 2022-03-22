@@ -7,9 +7,9 @@ namespace WishList.Controllers
     public class ItemController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public ItemController(ApplicationDbContext applicationDbContext)
+        public ItemController(ApplicationDbContext context)
         {
-            _context = applicationDbContext;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -31,9 +31,9 @@ namespace WishList.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
-            var selectedItem = _context.Items.FirstOrDefault(p => p.Id == Id);
+            var selectedItem = _context.Items.FirstOrDefault(p => p.Id == id);
             _context.Remove(selectedItem);
             _context.SaveChanges();
             return RedirectToAction("Index");
